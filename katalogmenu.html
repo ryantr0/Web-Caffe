@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Menu - KOPINUSANTARA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Skema Warna: Hitam, Putih, dan Hijau Sage */
+        :root {
+            --bg-dark: #000000;
+            --text-light: #FFFFFF;
+            --sage-green: #9DB998;
+            --sage-dark: #687D64;
+            --text-secondary: #AAAAAA;
+            --highlight-font: 'Playfair Display', serif;
+            --main-font: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--main-font);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--highlight-font);
+            color: var(--text-light);
+            line-height: 1.1;
+        }
+
+        a {
+            color: var(--sage-green);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        /* --- Header & Navigasi --- */
+        header {
+            background-color: var(--sage-dark);
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .logo { font-size: 24px; font-weight: 900; color: var(--text-light); }
+        .logo span { color: var(--sage-green); font-size: 0.7em; margin-left: 5px;} 
+        
+        /* Tombol di Navigasi */
+        .order-button {
+            background-color: var(--sage-green);
+            color: var(--bg-dark);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .order-button:hover {
+            background-color: var(--sage-dark);
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        /* --- Section Utama --- */
+        .katalog-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .katalog-section h2 {
+            font-family: var(--highlight-font);
+            font-size: 4em;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+        
+        /* --- Menu Grid Visual --- */
+        .menu-grid-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 50px 0;
+            text-align: left;
+        }
+        
+        .menu-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .menu-card-content {
+            padding: 20px;
+        }
+
+        .menu-card-content h3 {
+            font-family: var(--main-font);
+            color: var(--sage-green);
+            margin: 0 0 5px 0;
+            font-size: 1.5em;
+        }
+        .menu-card-content .description {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            min-height: 40px; /* Jaga konsistensi tinggi */
+        }
+        .menu-card-content .price {
+            color: var(--text-light);
+            font-weight: bold;
+            font-size: 1.3em;
+            display: block;
+        }
+
+        /* --- Footer Minimalis --- */
+        footer {
+            background-color: var(--bg-dark);
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .menu-grid-visual {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">KOPINUSANTARA<span>+</span></div>
+            <nav>
+                <a href="beranda.html">Beranda</a>
+                <a href="orderonline.html" class="order-button">Pesan Sekarang</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="katalog-section">
+            <div class="container">
+                <h4 style="font-family: var(--main-font); font-weight: 500; color: var(--sage-green);">Katalog</h4>
+                <h2>Menu Pilihan Terbaik</h2>
+                <p style="color: var(--text-secondary); max-width: 800px; margin: 0 auto 50px;">
+                    Lihatlah semua pilihan yang kami tawarkan. Untuk pemesanan, silakan klik tombol "Pesan Sekarang" di atas atau kembali ke halaman utama.
+                </p>
+
+                <div class="menu-grid-visual">
+                    
+                    <div class="menu-card">
+                        <img src="gambar/kopisusu.png" alt="Kopi Antrik" class="menu-card-image">
+                        <div class="menu-card-content">
+                            <h3>Kopi Antrik</h3>
+                            <p class="description">Espresso, susu, dan gula aren otentik yang diracik dengan *passion* ala manusia.</p>
+                            <span class="price">Rp 25.000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                         <img src="gambar/eskopigaramlaut.png" alt="Es Kopi Garam Laut" class="menu-card-image">
+                        <div class="menu-card-content">
+                            <h3>Es Kopi Garam Laut</h3>
+                            <p class="description">Kopi susu dengan sentuhan unik *sea salt caramel*, memberikan rasa manis, asin, dan creamy yang seimbang.</p>
+                            <span class="price">Rp 28.000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                         <img src="gambar/kopitubruk.png" alt="Sajian Benaman" class="menu-card-image">
+                        <div class="menu-card-content">
+                            <h3>Sajian Benaman</h3>
+                            <p class="description">Kopi tubruk metode manual. Pahit dan otentik. Pilihan tepat bagi penggemar kopi murni.</p>
+                            <span class="price">Rp 22.000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                         <img src="gambar/essususcoklat.png" alt="Cokelat Manusia" class="menu-card-image">
+                        <div class="menu-card-content">
+                            <h3>Cokelat Manusia</h3>
+                            <p class="description">Campuran cokelat pekat dan susu segar berkualitas tinggi. Kenikmatan tanpa kafein.</p>
+                            <span class="price">Rp 30.000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                         <img src="gambar/donatbomboloni.png" alt="Donat Bomboloni" class="menu-card-image">
+                        <div class="menu-card-content">
+                            <h3>Donat Bomboloni</h3>
+                            <p class="description">Donat lembut dengan berbagai isian *premium*, cocok sebagai teman kopi atau camilan.</p>
+                            <span class="price">Rp 18.000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                         <img src="gambar/nasigorengmatasapi.png" alt="Nasi Goreng Mata Sapi" class="menu-card-image">
+                        <div class="menu-card-content">
+                            <h3>Nasi Goreng Mata Sapi</h3>
+                            <p class="description">Menu andalan: nasi goreng pedas dengan telur mata sapi. Rasa akrab yang mengenyangkan.</p>
+                            <span class="price">Rp 35.000</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p style="color: var(--text-secondary); font-size: 0.9em;">Untuk pemesanan, silakan kunjungi <a href="order_menu_q

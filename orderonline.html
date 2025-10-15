@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online & Menu - KOPINUSANTARA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Skema Warna: Hitam, Putih, dan Hijau Sage */
+        :root {
+            --bg-dark: #000000;
+            --text-light: #FFFFFF;
+            --sage-green: #9DB998;
+            --sage-dark: #687D64;
+            --text-secondary: #AAAAAA;
+            --highlight-font: 'Playfair Display', serif;
+            --main-font: 'Inter', sans-serif;
+            --qris-blue: #00874c;
+        }
+
+        body {
+            font-family: var(--main-font);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--highlight-font);
+            color: var(--text-light);
+            line-height: 1.1;
+        }
+
+        a {
+            color: var(--sage-green);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--sage-dark);
+            text-decoration: underline;
+        }
+
+        /* --- Header & Navigasi --- */
+        header {
+            background-color: var(--sage-dark);
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+        .logo span { color: var(--sage-green); font-size: 0.7em; margin-left: 5px;} 
+
+        nav a {
+            color: var(--text-light);
+            margin-left: 30px;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        
+        /* Tombol di Navigasi */
+        .reservasi-button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            background-color: var(--sage-dark);
+            color: var(--text-light);
+        }
+
+        /* --- Section Utama --- */
+        .order-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .order-section h2 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            color: var(--sage-green);
+        }
+        
+        /* Layout Grid Utama (Menu dan Keranjang) */
+        .main-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start; /* Keranjang menempel di atas */
+            margin-top: 50px;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            flex-grow: 1; /* Ambil ruang sebanyak mungkin */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dibuat lebih kecil agar ada ruang untuk keranjang */
+            gap: 20px;
+            text-align: left;
+        }
+        
+        .menu-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border: 1px solid var(--sage-dark);
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-info {
+            flex-grow: 1;
+        }
+
+        .item-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.4em;
+            font-family: var(--main-font); /* Ubah font untuk item menu */
+            font-weight: 700;
+        }
+        .item-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .item-price-action {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .item-price {
+            color: var(--sage-green);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Style untuk tombol Tambah ke Keranjang */
+        .action-button {
+            background-color: var(--sage-green);
+            color: var(--bg-dark);
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .action-button:hover {
+            background-color: var(--sage-dark);
+            color: var(--text-light);
+        }
+        
+        /* --- Keranjang Belanja (Cart) --- */
+        .cart-sidebar {
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--sage-dark);
+            position: sticky; /* Agar keranjang tetap terlihat saat scroll */
+            top: 20px; 
+        }
+        
+        .cart-sidebar h3 {
+            font-size: 1.8em;
+            margin-top: 0;
+            border-bottom: 2px solid var(--sage-dark);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            font-size: 0.95em;
+        }
+        
+        .item-name {
+            flex-grow: 1;
+        }
+        
+        .item-qty {
+            margin-right: 10px;
+            font-weight: bold;
+            color: var(--sage-green);
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ff5555;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0 5px;
+        }
+        
+        .cart-total {
+            padding-top: 10px;
+            border-top: 2px solid var(--sage-dark);
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .checkout-button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--sage-green);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .checkout-button:hover {
+            background-color: var(--sage-dark);
+            color: var(--text-light);
+        }
+        
+        .empty-cart-message {
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        /* Responsif */
+        @media (max-width: 1024px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .cart-sidebar {
+                width: 100%;
+                position: static;
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                text-align: center;
+            }
+            nav a {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <a href="beranda.html" style="text-decoration: none;">
+                <div class="logo">KOPINUSANTARA<span>+</span></div>
+            </a>
+            <nav>
+                <a href="index.html">Menu Order</a> 
+                <a href="resevasi.html" target="_blank" class="reservasi-button">Reservasi</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="order-section">
+            <div class="container">
+                <h2>Pilih Menu, Bayar Cepat!</h2>
+                <p style="color: var(--text-secondary); max-width: 800px; margin: 0 auto 50px;">
+                    Pilih produk yang Anda inginkan dan tambahkan ke keranjang. Lanjutkan ke pembayaran cepat menggunakan QRIS setelah selesai memilih.
+                </p>
+
+                <div class="main-layout">
+                    
+                    <div class="menu-grid" id="menu-list">
+                    
+                        <div class="menu-card" data-name="Kopi Antrik" data-price="25000">
+                            <div class="item-info">
+                                <h4>Kopi Antrik</h4>
+                                <p>Espresso, susu, dan gula aren otentik.</p>
+                            </div>
+                            <div class="item-price-action">
+                                <span class="item-price">Rp 25.000</span>
+                                <button class="action-button" onclick="addToCart(this)">+ Tambah ke Keranjang</button>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-card" data-name="Es Kopi Garam Laut" data-price="28000">
+                            <div class="item-info">
+                                <h4>Es Kopi Garam Laut</h4>
+                                <p>Kopi susu dengan sentuhan *sea salt caramel*.</p>
+                            </div>
+                            <div class="item-price-action">
+                                <span class="item-price">Rp 28.000</span>
+                                <button class="action-button" onclick="addToCart(this)">+ Tambah ke Keranjang</button>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-card" data-name="Sajian Benaman" data-price="22000">
+                            <div class="item-info">
+                                <h4>Sajian Benaman</h4>
+                                <p>Kopi tubruk metode manual. Pahit dan otentik.</p>
+                            </div>
+                            <div class="item-price-action">
+                                <span class="item-price">Rp 22.000</span>
+                                <button class="action-button" onclick="addToCart(this)">+ Tambah ke Keranjang</button>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-card" data-name="Cokelat Manusia" data-price="30000">
+                            <div class="item-info">
+                                <h4>Cokelat Manusia</h4>
+                                <p>Campuran cokelat pekat dan susu segar.</p>
+                            </div>
+                            <div class="item-price-action">
+                                <span class="item-price">Rp 30.000</span>
+                                <button class="action-button" onclick="addToCart(this)">+ Tambah ke Keranjang</button>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-card" data-name="Donat Bomboloni" data-price="18000">
+                            <div class="item-info">
+                                <h4>Donat Bomboloni</h4>
+                                <p>Donat lembut dengan berbagai isian *premium*.</p>
+                            </div>
+                            <div class="item-price-action">
+                                <span class="item-price">Rp 18.000</span>
+                                <button class="action-button" onclick="addToCart(this)">+ Tambah ke Keranjang</button>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-card" data-name="Nasi Goreng Mata Sapi" data-price="35000">
+                            <div class="item-info">
+                                <h4>Nasi Goreng Mata Sapi</h4>
+                                <p>Menu andalan: nasi goreng pedas dengan telur.</p>
+                            </div>
+                            <div class="item-price-action">
+                                <span class="item-price">Rp 35.000</span>
+                                <button class="action-button" onclick="addToCart(this)">+ Tambah ke Keranjang</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="cart-sidebar">
+                        <h3><i class="fas fa-shopping-basket"></i> Keranjang Anda</h3>
+                        
+                        <ul id="cart-items">
+                            <li class="empty-cart-message">Keranjang kosong.</li>
+                        </ul>
+                        
+                        <div class="cart-total">
+                            <span>Total:</span>
+                            <span id="cart-total-price">Rp 0</span>
+                        </div>
+                        
+                        <button id="checkout-btn" class="checkout-button" disabled onclick="checkout()">
+                            <i class="fas fa-qrcode"></i> Lanjut Pembayaran QRIS
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p style="color: var(--text-secondary); font-size: 0.9em;">**KOPINUSANTARA** | Merayakan Kopi Sejak Zaman Edan. | Hubungi kami: 0878-2169-9178</p>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        const cartItemsElement = document.getElementById('cart-items');
+        const cartTotalPriceElement = document.getElementById('cart-total-price');
+        const checkoutButton = document.getElementById('checkout-btn');
+
+        // Fungsi untuk format mata uang Rupiah
+        function formatRupiah(number) {
+            return 'Rp ' + number.toLocaleString('id-ID');
+        }
+
+        // Fungsi utama untuk menampilkan keranjang
+        function renderCart() {
+            cartItemsElement.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsElement.innerHTML = '<li class="empty-cart-message">Keranjang kosong.</li>';
+                checkoutButton.disabled = true;
+                cartTotalPriceElement.textContent = formatRupiah(0);
+                return;
+            }
+            
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.classList.add('cart-item');
+                
+                // Hitung subtotal untuk item ini
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+
+                li.innerHTML = `
+                    <span class="item-qty">${item.quantity}x</span>
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-price">${formatRupiah(subtotal)}</span>
+                    <button class="remove-btn" onclick="removeFromCart(${index})">X</button>
+                `;
+                cartItemsElement.appendChild(li);
+            });
+
+            cartTotalPriceElement.textContent = formatRupiah(total);
+            checkoutButton.disabled = false;
+        }
+
+        // Fungsi Tambah ke Keranjang
+        function addToCart(button) {
+            const menuCard = button.closest('.menu-card');
+            const itemName = menuCard.dataset.name;
+            const itemPrice = parseInt(menuCard.dataset.price);
+
+            const existingItem = cart.find(item => item.name === itemName);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+            }
+
+            renderCart();
+        }
+
+        // Fungsi Hapus dari Keranjang
+        function removeFromCart(index) {
+            cart[index].quantity -= 1;
+
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1); // Hapus item jika kuantitasnya 0
+            }
+
+            renderCart();
+        }
+
+        // Fungsi Checkout (Navigasi ke halaman QRIS)
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Keranjang belanja Anda masih kosong.');
+                return;
+            }
+            
+            // Simpan data keranjang di Local Storage agar bisa diakses di halaman berikutnya
+            localStorage.setItem('cartData', JSON.stringify(cart));
+            
+            // Redirect ke halaman pembayaran
+            window.location.href = 'qris-pembayaran.html';
+        }
+
+        // Inisialisasi keranjang saat halaman dimuat
+        renderCart();
+    </script>
+</body>
+
+</html>

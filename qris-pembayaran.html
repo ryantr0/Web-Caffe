@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran QRIS - KOPINUSANTARA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root { --bg-dark: #000000; --text-light: #FFFFFF; --sage-green: #9DB998; --sage-dark: #687D64; --text-secondary: #AAAAAA; --highlight-font: 'Playfair Display', serif; --main-font: 'Inter', sans-serif; --qris-blue: #00874c; }
+        body { font-family: var(--main-font); margin: 0; padding: 0; background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; text-align: center; }
+        header { background-color: var(--bg-dark); padding: 20px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .logo { font-size: 24px; font-weight: 900; color: var(--text-light); }
+        .logo span { color: var(--sage-green); font-size: 0.7em; margin-left: 5px;}
+        h1 { font-family: var(--highlight-font); font-size: 3em; margin-top: 50px; color: var(--sage-green); }
+        
+        .qris-section {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--sage-dark);
+            margin-top: 30px;
+        }
+
+        .qris-box-img { 
+            background-color: var(--text-light); 
+            padding: 10px; 
+            border-radius: 6px; 
+            margin: 15px auto; 
+            display: inline-block; 
+        }
+        .qris-box-img img { 
+            width: 250px; 
+            height: 250px; 
+            background-color: #EEE; 
+            display: block; 
+        }
+        
+        .order-summary {
+            margin-top: 30px;
+            text-align: left;
+            border-bottom: 1px solid var(--sage-dark);
+            padding-bottom: 10px;
+        }
+        
+        #item-list {
+            list-style: none;
+            padding: 0;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .total-box {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 10px 0;
+            color: var(--text-light);
+        }
+        
+        .qris-instruction {
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--qris-blue);
+        }
+        
+        .whatsapp-link { 
+            display: block; 
+            margin-top: 25px; 
+            color: #25D366; 
+            font-weight: bold; 
+            padding: 10px;
+            border: 2px solid #25D366;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .whatsapp-link:hover {
+            background-color: rgba(37, 211, 102, 0.1);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="beranda.html" style="text-decoration: none;">
+                <div class="logo">KOPINUSANTARA<span>+</span></div>
+            </a>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Pembayaran Cepat QRIS</h1>
+            <p style="color: var(--text-secondary);">Detail pesanan Anda siap. Silakan scan QRIS di bawah ini untuk menyelesaikan pembayaran Anda.</p>
+            
+            <div class="qris-section">
+                
+                <h2>Ringkasan Pesanan</h2>
+                <div class="order-summary">
+                    <ul id="item-list">
+                        </ul>
+                </div>
+                
+                <div class="total-box">
+                    <span>TOTAL BAYAR:</span>
+                    <span id="final-total">Rp 0</span>
+                </div>
+                
+                <p class="qris-instruction">SCAN QR CODE DI BAWAH INI DENGAN SEMUA APLIKASI PEMBAYARAN ANDA (Dana, GoPay, dll.)</p>
+                
+                <div class="qris-box-img">
+                    <img src="https://ypp.co.id/site/uploads/qris/5f7c6da47a380-qr-code-dana.jpg" alt="Kode QRIS KOPINUSANTARA">
+                </div>
+                
+                <small style="color: #ffcc00; display: block; margin-top: 10px;">
+                    *Penting: Masukkan jumlah total pembayaran **(<span id="total-amount-note">Rp 0</span>)** secara manual di aplikasi Anda setelah scan.
+                </small>
+
+                <a href="#" id="wa-confirm-link" target="_blank" class="whatsapp-link">
+                   <i class="fab fa-whatsapp"></i> Konfirmasi Pembayaran
+                </a>
+            </div>
+            
+            <a href="index.html" style="margin-top: 30px; display: inline-block;">
+                <i class="fas fa-arrow-left"></i> Kembali ke Menu
+            </a>
+        </div>
+    </main>
+    <footer>
+        <p style="color: var(--text-secondary); font-size: 0.9em;">&copy; 2024 KOPINUSANTARA.</p>
+    </footer>
+
+    <script>
+        const itemListElement = document.getElementById('item-list');
+        const finalTotalElement = document.getElementById('final-total');
+        const totalAmountNoteElement = document.getElementById('total-amount-note');
+        const waConfirmLink = document.getElementById('wa-confirm-link');
+
+        function formatRupiah(number) {
+            return 'Rp ' + number.toLocaleString('id-ID');
+        }
+
+        function loadCartAndRender() {
+            // Ambil data keranjang dari Local Storage
+            const cartDataString = localStorage.getItem('cartData');
+            let cart = [];
+            let total = 0;
+            let orderDetails = ""; // Untuk pesan WhatsApp
+
+            if (cartDataString) {
+                cart = JSON.parse(cartDataString);
+            }
+
+            if (cart.length === 0) {
+                itemListElement.innerHTML = '<li style="text-align: center;">Tidak ada item di keranjang. <a href="index.html">Pesan sekarang!</a></li>';
+                return;
+            }
+
+            itemListElement.innerHTML = '';
+            
+            cart.forEach(item => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                
+                // Tambahkan ke daftar
+                const li = document.createElement('li');
+                li.classList.add('summary-item');
+                li.innerHTML = `
+                    <span>${item.quantity}x ${item.name}</span>
+                    <span>${formatRupiah(subtotal)}</span>
+                `;
+                itemListElement.appendChild(li);
+
+                // Buat string detail pesanan untuk WhatsApp
+                orderDetails += `${item.quantity}x ${item.name} (${formatRupiah(subtotal)})\n`;
+            });
+            
+            finalTotalElement.textContent = formatRupiah(total);
+            totalAmountNoteElement.textContent = formatRupiah(total);
+            
+            // Format pesan WhatsApp
+            const waMessage = encodeURIComponent(
+                `Halo KOPINUSANTARA, saya sudah melakukan pembayaran QRIS untuk pesanan:\n\n` +
+                `${orderDetails}\n` +
+                `Total Pembayaran: ${formatRupiah(total)}\n\n` +
+                `Mohon segera disiapkan. Terima kasih.`
+            );
+            
+            // Set link WhatsApp
+            waConfirmLink.href = `https://wa.me/6285774410978?text=${waMessage}`;
+        }
+
+        loadCartAndRender();
+    </script>
+</body>
+</html>
