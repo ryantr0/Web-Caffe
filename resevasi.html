@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservasi Tempat - KOPINUSANTARA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Skema Warna: Hitam, Putih, dan Hijau Sage (DIAMBIL DARI FILE UTAMA ANDA) */
+        :root {
+            --bg-dark: #000000;
+            --text-light: #FFFFFF;
+            --sage-green: #9DB998;
+            --sage-dark: #687D64;
+            --text-secondary: #AAAAAA;
+            --highlight-font: 'Playfair Display', serif;
+            --main-font: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--main-font);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* HEADER - Diambil dari file utama */
+        header {
+            background-color: var(--sage-dark);
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+        .logo span { color: var(--sage-green); font-size: 0.7em; margin-left: 5px;} 
+        nav a {
+            color: var(--text-light);
+            margin-left: 30px;
+            font-size: 1.1em;
+            font-weight: 500;
+            text-decoration: none; /* Tambahkan agar tautan tidak bergaris bawah */
+        }
+        nav span { /* Style untuk pemisah menu */
+            color: var(--text-light);
+            margin: 0 5px;
+        }
+
+        /* --- Style Khusus Reservasi --- */
+        .reservasi-section {
+            padding: 80px 0;
+        }
+
+        .reservasi-section h2 {
+            font-size: 3em;
+            color: var(--sage-green);
+        }
+
+        .reservasi-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 40px;
+            border: 1px solid var(--sage-dark);
+            text-align: left; /* Ubah agar form lebih mudah dibaca */
+        }
+        
+        /* Style untuk Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--sage-green);
+            font-size: 1.1em;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group input[type="time"],
+        .form-group input[type="number"],
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid var(--sage-dark);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-size: 1em;
+            box-sizing: border-box; /* Penting agar padding tidak melebarkan elemen */
+        }
+
+        /* Styling khusus untuk placeholder */
+        .form-group input::placeholder,
+        .form-group select:invalid {
+            color: var(--text-secondary);
+        }
+
+        /* Tombol WhatsApp */
+        .whatsapp-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #25D366; 
+            color: var(--text-light);
+            padding: 15px 35px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 25px;
+            transition: background-color 0.3s;
+            border: none; /* Jadikan tombol */
+            width: 100%;
+            cursor: pointer;
+        }
+        .whatsapp-button i {
+            margin-right: 10px;
+        }
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+        
+        .catatan-reservasi {
+            margin-top: 30px; 
+            font-size: 0.9em; 
+            color: var(--sage-green); 
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">KOPINUSANTARA<span>+</span></div>
+            <nav>
+                <a href="index.html" class="cta-button">Beranda</a> 
+                <span>|</span>
+                <a href="katalogmenu.html" class="cta-button">Menu</a> 
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="reservasi-section">
+            <div class="container">
+                <h2>Reservasi Tempat di KOPINUSANTARA</h2>
+                <p style="color: var(--text-secondary); font-size: 1.2em; text-align: center;">Isi detail reservasi Anda di bawah ini, dan kirimkan melalui WhatsApp dengan cepat!</p>
+
+                <div class="reservasi-box">
+                    <form id="reservasiForm">
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap</label>
+                            <input type="text" id="nama" name="nama" placeholder="Cth: Bima Satria" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tanggal">Tanggal Reservasi</label>
+                            <input type="date" id="tanggal" name="tanggal" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="waktu">Waktu Reservasi</label>
+                            <input type="time" id="waktu" name="waktu" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jumlahOrang">Jumlah Orang</label>
+                            <input type="number" id="jumlahOrang" name="jumlahOrang" min="1" max="50" placeholder="Minimal 1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cabang">Pilih Cabang</label>
+                            <select id="cabang" name="cabang" required>
+                                <option value="" disabled selected>Pilih salah satu cabang</option>
+                                <option value="Bintaro">Bintaro</option>
+                                <option value="Pasar Santa">Pasar Santa</option>
+                                <option value="Kemang">Kemang</option>
+                                <option value="BSD">BSD</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="keperluan">Keperluan Reservasi (Opsional)</label>
+                            <input type="text" id="keperluan" name="keperluan" placeholder="Cth: Meeting dengan klien / Ulang Tahun">
+                        </div>
+
+                        <button type="submit" class="whatsapp-button">
+                            <i class="fab fa-whatsapp"></i> Reservasi Sekarang via WhatsApp
+                        </button>
+                    </form>
+                    
+                    <p class="catatan-reservasi">Pastikan Anda mengisi detail dengan benar. Setelah klik tombol, Anda akan diarahkan ke WhatsApp untuk mengirimkan pesan.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background-color: var(--bg-dark); color: var(--text-light); text-align: center; padding: 30px 0;">
+        <p>© 2024 **KOPINUSANTARA**. Merayakan Kopi Sejak Zaman Edan.</p>
+    </footer>
+    
+    <script>
+        document.getElementById('reservasiForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form submit secara default
+
+            // 1. Ambil data dari input
+            const nama = document.getElementById('nama').value;
+            const tanggal = document.getElementById('tanggal').value;
+            const waktu = document.getElementById('waktu').value;
+            const jumlahOrang = document.getElementById('jumlahOrang').value;
+            const cabang = document.getElementById('cabang').value;
+            const keperluan = document.getElementById('keperluan').value || "-"; // Menggunakan "-" jika kosong
+
+            // 2. Format tanggal menjadi DD/MM/YYYY (jika Anda ingin)
+            const [year, month, day] = tanggal.split('-');
+            const formattedDate = `${day}/${month}/${year}`;
+            
+            // 3. Buat teks pesan WhatsApp
+            const message = `Halo KOPINUSANTARA, saya ingin reservasi tempat.
+
+Nama: ${nama}
+Tanggal: ${formattedDate}
+Waktu: ${waktu}
+Jumlah Orang: ${jumlahOrang}
+Cabang: ${cabang}
+Keperluan: ${keperluan}`;
+
+            // 4. Encode teks untuk URL
+            const encodedMessage = encodeURIComponent(message);
+
+            // 5. Buat URL WhatsApp
+            const phoneNumber = '6285774410978'; // Nomor WhatsApp KOPINUSANTARA
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            // 6. Redirect ke WhatsApp
+            window.open(whatsappURL, '_blank');
+        });
+    </script>
+
+</body>
+
+</html>
